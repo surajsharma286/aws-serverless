@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/HelloWorldFunction/HelloWorld.iml" filepath="$PROJECT_DIR$/HelloWorldFunction/HelloWorld.iml" />
+      <module fileurl="file://$PROJECT_DIR$/aws-lambda.iml" filepath="$PROJECT_DIR$/aws-lambda.iml" />
+      <module fileurl="file://$PROJECT_DIR$/customercheckout/customercheckout.iml" filepath="$PROJECT_DIR$/customercheckout/customercheckout.iml" />
+      <module fileurl="file://$PROJECT_DIR$/customercheckout/customercheckout/customercheckoutapi.iml" filepath="$PROJECT_DIR$/customercheckout/customercheckout/customercheckoutapi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ordersapi/orderapi/orderapi.iml" filepath="$PROJECT_DIR$/ordersapi/orderapi/orderapi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ordersapi/ordersapi.iml" filepath="$PROJECT_DIR$/ordersapi/ordersapi.iml" />
+    </modules>
+  </component>
+</project>

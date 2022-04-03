@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="orderapi" />
+        <module name="HelloWorld" />
+        <module name="customercheckoutapi" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="customercheckoutapi" target="1.8" />
+      <module name="HelloWorld" target="1.8" />
+      <module name="orderapi" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

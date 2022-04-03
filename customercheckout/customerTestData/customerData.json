@@ -1,0 +1,12 @@
+[
+	{
+		"customerNo": "123456789",
+		"firstName":"Suraj",
+		"lastName":"Sharma"
+	},
+	{
+		"customerNo": "123456789",
+		"firstName":"Sharma",
+		"lastName":"Suraj"
+	}
+]

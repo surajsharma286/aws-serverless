@@ -1,0 +1,70 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  customercheckout
+
+  Sample SAM Template for customercheckout
+
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Runtime: java11
+    Architectures:
+      - x86_64
+    MemorySize: 512
+    Timeout: 30
+
+Resources:
+  CustomerCheckoutDLQ:
+    Type: AWS::SNS::Topic
+  CustomerCheckoutBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub ${AWS::StackName}-${AWS::AccountId}-${AWS::Region}
+  CustomerCheckoutTopic:
+    Type: AWS::SNS::Topic
+  CustomerCheckoutFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: customercheckout
+      Handler: com.suraj.aws.lambda.s3.CustomerCheckoutLambda::handler
+      EventInvokeConfig:
+        MaximumRetryAttempts: 0
+      DeadLetterQueue:
+        Type: SNS
+        TargetArn: !Ref CustomerCheckoutDLQ
+      Policies:
+        - S3ReadPolicy:
+            BucketName: !Sub ${AWS::StackName}-${AWS::AccountId}-${AWS::Region}
+        - SNSPublishMessagePolicy:
+            TopicName: !GetAtt CustomerCheckoutTopic.TopicName
+      Environment:
+        Variables:
+          CUSTOMER_CHECKOUT_TOPIC: !Ref CustomerCheckoutTopic
+      Events:
+        S3Event:
+          Type: S3
+          Properties:
+            Bucket: !Ref CustomerCheckoutBucket
+            Events: s3:ObjectCreated:*
+  BillManagementFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: customercheckout
+      Handler: com.suraj.aws.lambda.sns.BillManagementLambda::handler
+      Events:
+        SNSEvent:
+          Type: SNS
+          Properties:
+            Topic: !Ref CustomerCheckoutTopic
+  ErrorHandlerFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: customercheckout
+      Handler: com.suraj.aws.lambda.errorhandling.ErrorHandler::handler
+      Events:
+        SNSEvent:
+          Type: SNS
+          Properties:
+            Topic: !Ref CustomerCheckoutDLQ
+
