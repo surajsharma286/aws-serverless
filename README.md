@@ -2,12 +2,14 @@
 
 This project contains source code and supporting files for a serverless application that you can deploy with the SAM CLI. It includes the following files and folders.
 
-- ordersapi/src/main - Code for the Orders API Lambda function. Lambda function is expsoed using API Gateway.
+- ordersapi/src/main - Code for the Orders API Lambda function. Lambda function is exposed using API Gateway.
 - customercheckout/src/main - Code for the Orders API Lambda function. Customer Checkout Lambda function is invoked via S3 events and once the vents are processed message is sent to SNS Topic. 
 - template.yaml - A template that defines the application's AWS resources.
 
 The application uses several AWS resources, including Lambda functions, API Gateway API, S3 and SNS. These resources are defined in the `template.yaml` file in this project. You can update the template to add AWS resources through the same deployment process that updates your application code.
 
+![img.png](img.png)
+![img_1.png](img_1.png)
 ## Deploy the sample application
 
 To build and deploy your application for the first time, run the following in your shell:
